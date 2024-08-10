@@ -60,37 +60,16 @@ const DigitalClock = () => {
   useEffect(() => {
     updateDateTime();
   }, []);
-  // const day = dayOfWeeks.get(date.getDay());
-  // const currentDate = date.getDate();
-  // let ordinalPostfix = "st";
-  // switch (currentDate.toString()[currentDate.toString().length - 1]) {
-  //   case "1":
-  //     ordinalPostfix = "st";
-  //     break;
-  //   case "2":
-  //     ordinalPostfix = "nd";
-  //     break;
-  //   case "3":
-  //     ordinalPostfix = "rd";
-  //     break;
-  //   default:
-  //     ordinalPostfix = "th";
-  // }
-  // const month = months.get(date.getMonth());
-  // const year = date.getFullYear();
 
   setInterval(() => {
     updateDateTime();
   }, 1000);
-
+  
   return (
-    <div className="tw-flex">
-      <p className="tw-font-semibold tw-underline tw-text-justify tw-w-20">{time}</p>
-      <p>
-        {day}, <span className="tw-font-semibold">{month} {date}{ordinalPostfix}</span>, {year}
-      </p>
+    <div>
+      {/* <p>{date}.{months.forEach((value, key) => {return key;})}.{year}</p> */}
     </div>
-  );
+  );return ""
 };
 
 export default DigitalClock;

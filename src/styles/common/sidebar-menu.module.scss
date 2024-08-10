@@ -2,16 +2,19 @@
   position: sticky;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2.25rem;
   padding: 2rem 0;
   box-shadow: 2px 0 6px -1px rgb(0 0 0 / 0.1);
+  transition: width 500ms;
+  width: 0;
+  overflow: hidden;
 }
 
 .menu {
 	flex-grow: 1;
   display: flex;
 	flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 	padding-left: 1rem;
 }
 
@@ -23,12 +26,19 @@
 
 	&:hover > .menuItemBackground {
 		width: 100%;
-		box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+		box-shadow: 4px 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 	}
 
 	&:hover > .menuItemContent {
 		opacity: 0.9;
-		text-decoration: underline;
+		// text-decoration: underline;
+    font-weight: 600;
+	}
+
+	&:hover > .menuItemContent > .menuItemIcon {
+    height: 2.5rem;
+    width: 2.5rem;
+		transform: rotate(360deg);
 	}
 }
 
@@ -42,7 +52,7 @@
   background-color: bisque;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 500ms;
+  transition-duration: 250ms;
 	border-radius: 0.75rem 0 0 0.75rem;
 }
 
@@ -53,4 +63,10 @@
   padding: 0.5rem 2rem 0.5rem 0.75rem;
 	font-size: 1rem;
 	font-weight: 500;
+}
+
+.menuItemIcon {
+  height: 2rem;
+  width: 2rem;
+  transition: height 0.5s, width 0.5s, transform 0.5s;
 }

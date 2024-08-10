@@ -9,6 +9,7 @@ const MenuItem = ({ children }: { children: ReactNode }) => {
       <div className={`${sidebarMenu.menuItemBackground}`}/>
       <div className={`${sidebarMenu.menuItemContent}`}>
         <Image
+          className={`${sidebarMenu.menuItemIcon}`}
           width={40}
           height={40}
           src={"https://github.com/shadcn.png"}
