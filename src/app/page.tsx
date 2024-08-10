@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+    <main className="tw-flex tw-min-h-screen tw-flex-col tw-items-center tw-justify-between tw-p-24">
+      <div className="tw-z-10 tw-w-full tw-max-w-5xl tw-items-center tw-justify-between tw-font-mono tw-text-sm lg:tw-flex">
+        <p className="tw-fixed tw-left-0 tw-top-0 tw-flex tw-w-full tw-justify-center tw-border-b tw-border-gray-300 tw-bg-gradient-to-b tw-from-zinc-200 tw-pb-6 tw-pt-8 tw-backdrop-blur-2xl dark:tw-border-neutral-800 dark:tw-bg-zinc-800/30 dark:tw-from-inherit lg:tw-static lg:tw-w-auto  lg:tw-rounded-xl lg:tw-border lg:tw-bg-gray-200 lg:tw-p-4 lg:dark:tw-bg-zinc-800/30">
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.tsx</code>
         </p>

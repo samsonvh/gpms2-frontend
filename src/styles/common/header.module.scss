@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    padding: 1.5rem 2rem 1rem;
+    gap: 1rem;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    border-radius: 0.5rem;
+}
+
+.leftSection {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;}
+
+.centerSection {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
