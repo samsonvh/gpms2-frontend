@@ -1,6 +1,6 @@
 [
   {
-    "id": "ir0001",
+    "id": "12c16efb-6340-47a4-a60a-66a108154bd7",
     "creatorName": "samson",
     "reviewerName": "samsonvh",
     "productionSeriesCode": "ps0001",
@@ -8,11 +8,11 @@
     "requiredQuantity": 100,
     "inspectedQuantity": 0,
     "passedQuantity": 0,
-    "createdDate": "12/12/2012",
+    "createdDate": "2012-04-23T18:25:43.511Z",
     "status": "approved"
   },
   {
-    "id": "ir0001",
+    "id": "12c16efb-6340-47a4-a60a-66a108154bd7",
     "creatorName": "samson",
     "reviewerName": "samsonvh",
     "productionSeriesCode": "ps0001",
@@ -20,11 +20,11 @@
     "requiredQuantity": 100,
     "inspectedQuantity": 0,
     "passedQuantity": 0,
-    "createdDate": "12/12/2012",
+    "createdDate": "2012-04-23T18:25:43.511Z",
     "status": "declined"
   },
   {
-    "id": "ir0001",
+    "id": "12c16efb-6340-47a4-a60a-66a108154bd7",
     "creatorName": "samson",
     "reviewerName": "samsonvh",
     "productionSeriesCode": "ps0001",
@@ -32,11 +32,11 @@
     "requiredQuantity": 100,
     "inspectedQuantity": 0,
     "passedQuantity": 0,
-    "createdDate": "12/12/2012",
+    "createdDate": "2012-04-23T18:25:43.511Z",
     "status": "pending"
   },
   {
-    "id": "ir0001",
+    "id": "12c16efb-6340-47a4-a60a-66a108154bd7",
     "creatorName": "samson",
     "reviewerName": "samsonvh",
     "productionSeriesCode": "ps0001",
@@ -44,11 +44,11 @@
     "requiredQuantity": 100,
     "inspectedQuantity": 0,
     "passedQuantity": 0,
-    "createdDate": "12/12/2012",
+    "createdDate": "2012-04-23T18:25:43.511Z",
     "status": "in_progress"
   },
   {
-    "id": "ir0001",
+    "id": "12c16efb-6340-47a4-a60a-66a108154bd7",
     "creatorName": "samson",
     "reviewerName": "samsonvh",
     "productionSeriesCode": "ps0001",
@@ -56,7 +56,7 @@
     "requiredQuantity": 100,
     "inspectedQuantity": 100,
     "passedQuantity": 100,
-    "createdDate": "12/12/2012",
+    "createdDate": "2012-04-23T18:25:43.511Z",
     "status": "done"
   }
 ]

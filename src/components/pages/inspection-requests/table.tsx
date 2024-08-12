@@ -3,14 +3,9 @@ import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { InspectionRequestListingDto } from "@/data/types/inspectionRequest";
 import DataTable, { StatusCell } from "@/components/common/data-table";
-import data from "@/data/mock-data/inspectionRequest.json"
+import data from "@/data/mock-data/inspectionRequest.json";
 
 const columns: ColumnDef<InspectionRequestListingDto>[] = [
-  {
-    accessorKey: "id",
-    header: "ID",
-    id: "id",
-  },
   {
     accessorKey: "creatorName",
     header: "Creator",
@@ -55,14 +50,23 @@ const columns: ColumnDef<InspectionRequestListingDto>[] = [
     accessorKey: "status",
     header: "Status",
     id: "status",
-    cell: StatusCell
+    cell: StatusCell,
   },
 ];
 
 const InspectionRequestListTable = () => {
+  const inspectionRequests: InspectionRequestListingDto[] = [];
+  data.forEach((element) => {
+    const request: InspectionRequestListingDto = {
+      ...element,
+      createdDate: new Date(element.createdDate),
+    };
+    inspectionRequests.push(request);
+  });
+
   return (
     <div>
-      <DataTable columns={columns} data={data}/>
+      <DataTable columns={columns} data={inspectionRequests} />
     </div>
   );
 };
