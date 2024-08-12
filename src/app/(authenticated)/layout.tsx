@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="tw-flex tw-flex-col tw-p-4 tw-min-h-screen">
+        <main className="tw-flex tw-flex-col tw-p-4 tw-min-h-screen tw-gap-4">
           <Header2 />
           {children}
         </main>

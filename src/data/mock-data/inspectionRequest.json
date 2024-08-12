@@ -1,0 +1,62 @@
+[
+  {
+    "id": "ir0001",
+    "creatorName": "samson",
+    "reviewerName": "samsonvh",
+    "productionSeriesCode": "ps0001",
+    "name": "Inspect new series",
+    "requiredQuantity": 100,
+    "inspectedQuantity": 0,
+    "passedQuantity": 0,
+    "createdDate": "12/12/2012",
+    "status": "approved"
+  },
+  {
+    "id": "ir0001",
+    "creatorName": "samson",
+    "reviewerName": "samsonvh",
+    "productionSeriesCode": "ps0001",
+    "name": "Inspect new series",
+    "requiredQuantity": 100,
+    "inspectedQuantity": 0,
+    "passedQuantity": 0,
+    "createdDate": "12/12/2012",
+    "status": "declined"
+  },
+  {
+    "id": "ir0001",
+    "creatorName": "samson",
+    "reviewerName": "samsonvh",
+    "productionSeriesCode": "ps0001",
+    "name": "Inspect new series",
+    "requiredQuantity": 100,
+    "inspectedQuantity": 0,
+    "passedQuantity": 0,
+    "createdDate": "12/12/2012",
+    "status": "pending"
+  },
+  {
+    "id": "ir0001",
+    "creatorName": "samson",
+    "reviewerName": "samsonvh",
+    "productionSeriesCode": "ps0001",
+    "name": "Inspect new series",
+    "requiredQuantity": 100,
+    "inspectedQuantity": 0,
+    "passedQuantity": 0,
+    "createdDate": "12/12/2012",
+    "status": "in_progress"
+  },
+  {
+    "id": "ir0001",
+    "creatorName": "samson",
+    "reviewerName": "samsonvh",
+    "productionSeriesCode": "ps0001",
+    "name": "Inspect new series",
+    "requiredQuantity": 100,
+    "inspectedQuantity": 100,
+    "passedQuantity": 100,
+    "createdDate": "12/12/2012",
+    "status": "done"
+  }
+]
