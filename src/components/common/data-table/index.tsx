@@ -63,7 +63,7 @@ const DataTable = <TData, TValue>({
 
   return (
     <div>
-      <Table className="tw-w-max">
+      <Table className="tw-w-max tw-min-w-full">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

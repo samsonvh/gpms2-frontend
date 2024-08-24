@@ -1,3 +1,19 @@
-.container {
+@import "../../../responsive.scss";
 
+.container {
+  @include Responsive(md) {
+  }
+}
+
+.sm {
+  @include Responsive(md) {
+    display: none;
+  }
+}
+
+.md {
+  display: none;
+  @include Responsive(md) {
+    display: block;
+  }
 }

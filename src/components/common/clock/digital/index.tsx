@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import digitalClock from "@/styles/common/clock/digital/digital-clock.module.scss"
+import digitalClock from "@/styles/common/clock/digital/digital-clock.module.scss";
 
 const DigitalClock = () => {
   const dayOfWeeks = new Map();
@@ -32,7 +32,7 @@ const DigitalClock = () => {
   const [minutes, setMinutes] = useState<number>();
   const [day, setDay] = useState<string>();
   const [date, setDate] = useState<string>();
-  const [ordinalPostfix, setOrdinalPostfix] = useState<string>();
+  const [ordinalPostfix, setOrdinalPostfix] = useState<string>("th");
   const [month, setMonth] = useState<number>();
   const [year, setYear] = useState<string>();
 
@@ -73,8 +73,20 @@ const DigitalClock = () => {
   return (
     <div className={digitalClock.container}>
       {/* <p>{date}.{months.forEach((value, key) => {return key;})}.{year}</p> */}
-      <span>{date + "/" + month + "/" + year}</span>
-      <span> - {hours + ":" + (minutes! < 10 ? "0" + minutes : minutes)}</span>
+      <div className={digitalClock.sm}>
+        <span>{date + "/" + month + "/" + year}</span>
+        <span>
+          {" "}
+          - {hours + ":" + (minutes! < 10 ? "0" + minutes : minutes)}
+        </span>
+      </div>
+      <div className={digitalClock.md}>
+        <span>{day}, {months.get(month)} {date + ordinalPostfix}, {year}</span>
+        <span>
+          {" "}
+          - {hours + ":" + (minutes! < 10 ? "0" + minutes : minutes)}
+        </span>
+      </div>
     </div>
   );
 };
