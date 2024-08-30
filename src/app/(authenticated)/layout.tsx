@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
 import DefaultHeader from "@/components/common/header";
 import { cn } from "@/lib/utils";
+import DefaultFooter from "@/components/common/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,14 @@ export default function AuthenticatedLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "tw-min-h-screen tw-flex tw-flex-col")}>
-        <div>
-          <DefaultHeader />
-        </div>
-        <main className="tw-mt-8">{children}</main>
+      <body
+        className={inter.className.concat(
+          " tw-h-screen tw-pt-4 tw-flex tw-flex-col"
+        )}
+      >
+        <DefaultHeader />
+        <main className="tw-mt-8 tw-flex-grow">{children}</main>
+        <DefaultFooter />
       </body>
     </html>
   );

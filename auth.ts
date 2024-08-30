@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { User } from "next-auth";
 import credentials from "next-auth/providers/credentials";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -9,13 +9,39 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async (credentials) => {
-        let user = null;
-        console.log("Credentials:", credentials);
-        return {};
+        let user: User = {};
+
+        let data = await fetch("http://localhost:5182/api/v1/auth/sign-in", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            email: credentials.email,
+            password: credentials.password,
+          }),
+        }).then((response) => response.json());
+
+        user.id = data.accessToken;
+        user.name = data.account.fullName;
+        user.email = data.account.email;
+        return user;
       },
     }),
   ],
   pages: {
     signIn: "/login",
   },
+  callbacks: {
+    jwt({token, user}) {
+      if(user){
+        token.id = user.id;
+      }
+      return token;
+    },
+    session({session, token}){
+      session.user.id = token.id as string;
+      return session;
+    }
+  }
 });
