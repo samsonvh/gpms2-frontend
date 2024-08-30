@@ -55,7 +55,7 @@ const CreateModal = () => {
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="tw-flex tw-flex-col tw-gap-2">
             <DialogHeader>
               <DialogTitle>Create new inspection request</DialogTitle>
               <DialogDescription>
@@ -129,7 +129,7 @@ const CreateModal = () => {
                 <FormItem>
                   <FormLabel>Description:</FormLabel>
                   <FormControl>
-                    <Textarea  {...field} />
+                    <Textarea className="tw-resize-none" {...field} />
                   </FormControl>
                   <FormDescription></FormDescription>
                   <FormMessage />
