@@ -1,4 +1,4 @@
-import { object, string } from "zod";
+import { number, object, string } from "zod";
 
 export const signInSchema = object({
   email: string({ required_error: "Email is required" })
@@ -16,4 +16,8 @@ export const createInspectionRequestSchema = object({
   productionSeriesId: string({
     required_error: "Must request for a specific series",
   }),
+  requiredQuantity: number({
+    required_error: "Required quantity for inspection",
+  }),
+  description: string().optional(),
 });

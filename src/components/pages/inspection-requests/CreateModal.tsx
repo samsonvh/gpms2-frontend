@@ -17,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -24,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { createInspectionRequestSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
@@ -67,7 +69,7 @@ const CreateModal = () => {
                 <FormItem>
                   <FormLabel>Production plan:</FormLabel>
                   <FormControl>
-                    <Select>
+                    <Select {...field}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select working production plan" />
                       </SelectTrigger>
@@ -90,7 +92,7 @@ const CreateModal = () => {
                 <FormItem>
                   <FormLabel>Production series:</FormLabel>
                   <FormControl>
-                    <Select>
+                    <Select {...field}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select working production series" />
                       </SelectTrigger>
@@ -100,6 +102,34 @@ const CreateModal = () => {
                         <SelectItem value="system">System</SelectItem>
                       </SelectContent>
                     </Select>
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="requiredQuantity"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Required quantity:</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="0" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description:</FormLabel>
+                  <FormControl>
+                    <Textarea  {...field} />
                   </FormControl>
                   <FormDescription></FormDescription>
                   <FormMessage />
