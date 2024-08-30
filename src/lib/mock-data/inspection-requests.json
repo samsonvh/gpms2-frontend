@@ -1,0 +1,161 @@
+[
+  {
+    "id": "6DB2377B-4846-44B0-82C1-177F1A7340B9",
+    "name": "Request inspection for ...",
+    "productionPlan": {
+      "id": "5538F747-08F9-43D8-9F04-905662ECA8BA",
+      "code": "PRP00000001"
+    },
+    "productionSeries": {
+      "id": "DC2FE20C-086B-4872-9355-6B6D0C8E82F6",
+      "code": "SRS00000001"
+    },
+    "requiredQuantity": 100,
+    "inspectedQuantity": 100,
+    "passedQuantity": 100,
+    "description": null,
+    "createdDate": "Dec 1 2021 12:00AM",
+    "reviewedDate": "Dec 2 2021 12:00AM",
+    "inspectedDate": "Dec 2 2021 6:00AM",
+    "creator": {
+      "id": "ADD7B2B3-934D-4375-8630-0C19A11CDF5B",
+      "code": "CRT00000001",
+      "fullname": "samson vh"
+    },
+    "reviewer": {
+      "id": "1192AD6B-33FA-45D5-9171-1168C4B8DD1D",
+      "code": "RVR00000001",
+      "fullname": "samson vh2"
+    },
+    "inspector": {
+      "id": "693968B3-DBED-4C21-B850-74FB56265090",
+      "code": "ISP00000001",
+      "fullname": "samson vh3"
+    },
+    "status": "passed"
+  },
+  {
+    "id": "6DB2377B-4846-44B0-82C1-177F1A7340B9",
+    "name": "Request inspection for ...",
+    "productionPlan": {
+      "id": "5538F747-08F9-43D8-9F04-905662ECA8BA",
+      "code": "PRP00000001"
+    },
+    "productionSeries": {
+      "id": "DC2FE20C-086B-4872-9355-6B6D0C8E82F6",
+      "code": "SRS00000002"
+    },
+    "requiredQuantity": 100,
+    "inspectedQuantity": 100,
+    "passedQuantity": 99,
+    "description": null,
+    "createdDate": "Dec 1 2021 12:00AM",
+    "reviewedDate": "Dec 2 2021 12:00AM",
+    "inspectedDate": "Dec 2 2021 6:00AM",
+    "creator": {
+      "id": "ADD7B2B3-934D-4375-8630-0C19A11CDF5B",
+      "code": "CRT00000001",
+      "fullname": "samson vh"
+    },
+    "reviewer": {
+      "id": "1192AD6B-33FA-45D5-9171-1168C4B8DD1D",
+      "code": "RVR00000001",
+      "fullname": "samson vh2"
+    },
+    "inspector": {
+      "id": "693968B3-DBED-4C21-B850-74FB56265090",
+      "code": "ISP00000001",
+      "fullname": "samson vh3"
+    },
+    "status": "failed"
+  },
+  {
+    "id": "6DB2377B-4846-44B0-82C1-177F1A7340B9",
+    "name": "Request inspection for ...",
+    "productionPlan": {
+      "id": "5538F747-08F9-43D8-9F04-905662ECA8BA",
+      "code": "PRP00000001"
+    },
+    "productionSeries": {
+      "id": "DC2FE20C-086B-4872-9355-6B6D0C8E82F6",
+      "code": "SRS00000001"
+    },
+    "requiredQuantity": 100,
+    "inspectedQuantity": 0,
+    "passedQuantity": 0,
+    "description": null,
+    "createdDate": "Dec 1 2021 12:00AM",
+    "reviewedDate": "Dec 2 2021 12:00AM",
+    "inspectedDate": null,
+    "creator": {
+      "id": "ADD7B2B3-934D-4375-8630-0C19A11CDF5B",
+      "code": "CRT00000001",
+      "fullname": "samson vh"
+    },
+    "reviewer": {
+      "id": "1192AD6B-33FA-45D5-9171-1168C4B8DD1D",
+      "code": "RVR00000001",
+      "fullname": "samson vh2"
+    },
+    "inspector": null,
+    "status": "approved"
+  },
+  {
+    "id": "6DB2377B-4846-44B0-82C1-177F1A7340B9",
+    "name": "Request inspection for ...",
+    "productionPlan": {
+      "id": "5538F747-08F9-43D8-9F04-905662ECA8BA",
+      "code": "PRP00000001"
+    },
+    "productionSeries": {
+      "id": "DC2FE20C-086B-4872-9355-6B6D0C8E82F6",
+      "code": "SRS00000001"
+    },
+    "requiredQuantity": 100,
+    "inspectedQuantity": 0,
+    "passedQuantity": 0,
+    "description": null,
+    "createdDate": "Dec 1 2021 12:00AM",
+    "reviewedDate": "Dec 2 2021 12:00AM",
+    "inspectedDate": null,
+    "creator": {
+      "id": "ADD7B2B3-934D-4375-8630-0C19A11CDF5B",
+      "code": "CRT00000001",
+      "fullname": "samson vh"
+    },
+    "reviewer": {
+      "id": "1192AD6B-33FA-45D5-9171-1168C4B8DD1D",
+      "code": "RVR00000001",
+      "fullname": "samson vh2"
+    },
+    "inspector": null,
+    "status": "declined"
+  },
+  {
+    "id": "6DB2377B-4846-44B0-82C1-177F1A7340B9",
+    "name": "Request inspection for ...",
+    "productionPlan": {
+      "id": "5538F747-08F9-43D8-9F04-905662ECA8BA",
+      "code": "PRP00000001"
+    },
+    "productionSeries": {
+      "id": "DC2FE20C-086B-4872-9355-6B6D0C8E82F6",
+      "code": "SRS00000001"
+    },
+    "requiredQuantity": 100,
+    "inspectedQuantity": 0,
+    "passedQuantity": 0,
+    "description": null,
+    "createdDate": "Dec 1 2021 12:00AM",
+    "reviewedDate": null,
+    "inspectedDate": null,
+    "creator": {
+      "id": "ADD7B2B3-934D-4375-8630-0C19A11CDF5B",
+      "code": "CRT00000001",
+      "fullname": "samson vh"
+    },
+    "reviewer": null,
+    "inspector": null,
+    "status": "pending"
+  }
+]
