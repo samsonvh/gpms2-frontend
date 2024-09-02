@@ -6,17 +6,20 @@ export const signInSchema = object({
     .email("Email is invalid"),
   password: string({ required_error: "Password is required" })
     .min(1, "Password is required")
-    .min(8, "Password must be more than 8 characters"),
+    // .min(8, "Password must be more than 8 characters"),
 });
 
 export const createInspectionRequestSchema = object({
   productionPlanId: string({
     required_error: "Must select a working production plan",
   }),
+  productionRequirementId: string({
+    required_error: "Must select a requirement",
+  }),
   productionSeriesId: string({
     required_error: "Must request for a specific series",
   }),
-  requiredQuantity: number({
+  requiredQuantity: string({
     required_error: "Required quantity for inspection",
   }),
   description: string().optional(),

@@ -24,8 +24,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React, { useEffect, useState } from "react";
 import { inspectionRequestColumns } from "@/components/common/data-table/columns";
 import inspectionRequestData from "@/lib/mock-data/inspection-requests.json";
+import { getInspectionRequestList } from "@/lib/api-calls/inspection-request";
 
 const InspectionRequestsPage = () => {
+  const [list, setList] = useState();
+
+  const a = async () => {
+    const b = await getInspectionRequestList();
+    setList(b);
+  };
+
+  useEffect(() => {
+    a();
+  }, []);
+
   return (
     <Card className="tw-mx-6 tw-h-full tw-flex tw-flex-col">
       <CardHeader>
@@ -53,13 +65,41 @@ const InspectionRequestsPage = () => {
             </TabsList>
           </div>
           <TabsContent value="all">
-            <DataTable columns={inspectionRequestColumns} data={inspectionRequestData} />
+            <DataTable
+              columns={inspectionRequestColumns}
+              data={list}
+            />
           </TabsContent>
-          <TabsContent value="pending">Pending</TabsContent>
-          <TabsContent value="approved">Approved</TabsContent>
-          <TabsContent value="inProgress">In Progress</TabsContent>
-          <TabsContent value="failed">Failed</TabsContent>
-          <TabsContent value="passed">Passed</TabsContent>
+          <TabsContent value="pending">
+            <DataTable
+              columns={inspectionRequestColumns}
+              data={inspectionRequestData}
+            />
+          </TabsContent>
+          <TabsContent value="approved">
+            <DataTable
+              columns={inspectionRequestColumns}
+              data={inspectionRequestData}
+            />
+          </TabsContent>
+          <TabsContent value="inProgress">
+            <DataTable
+              columns={inspectionRequestColumns}
+              data={inspectionRequestData}
+            />
+          </TabsContent>
+          <TabsContent value="failed">
+            <DataTable
+              columns={inspectionRequestColumns}
+              data={inspectionRequestData}
+            />
+          </TabsContent>
+          <TabsContent value="passed">
+            <DataTable
+              columns={inspectionRequestColumns}
+              data={inspectionRequestData}
+            />
+          </TabsContent>
         </Tabs>
       </CardContent>
     </Card>

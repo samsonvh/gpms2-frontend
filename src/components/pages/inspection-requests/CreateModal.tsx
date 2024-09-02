@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -26,26 +27,94 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { createInspectionRequest } from "@/lib/api-calls/inspection-request";
+import { getWorkingProductionPlan } from "@/lib/api-calls/production-plan";
+import { getProductionRequirementsByPlanId } from "@/lib/api-calls/production-requirement";
+import { getSeriesByRequirementId } from "@/lib/api-calls/production-series";
+import { ProductionPlanSelectListItem } from "@/lib/types/production-plan";
+import { ProductionRequirmentItem } from "@/lib/types/production-requirement";
+import { ProductionSeriesListItem } from "@/lib/types/production-series";
 import { createInspectionRequestSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const CreateModal = () => {
+  const session = useSession();
+
   const form = useForm<z.infer<typeof createInspectionRequestSchema>>({
     resolver: zodResolver(createInspectionRequestSchema),
     defaultValues: {
+      productionPlanId: "",
+      productionRequirementId: "",
       productionSeriesId: "",
+      description: "",
     },
   });
+
+  const [productionPlans, setProductionPlans] = useState<
+    ProductionPlanSelectListItem[]
+  >([]);
+  const [selectedPlan, setSelectedPlan] = useState<string>();
+
+  const [productionRequirements, setProductionRequirements] = useState<
+    ProductionRequirmentItem[]
+  >([]);
+  const [selectedRequirement, setSelectedRequirement] = useState<string>();
+
+  const [productionSeries, setProductionSeries] = useState<
+    ProductionSeriesListItem[]
+  >([]);
+  const [selectedSeries, setSelectedSeries] =
+    useState<string>();
+
+  const getPlans = async () => {
+    const list = await getWorkingProductionPlan();
+    setProductionPlans(list);
+  };
+  const getRequirements = async (selectedPlanId: string) => {
+    const list = await getProductionRequirementsByPlanId(selectedPlanId);
+    setProductionRequirements(list);
+  };
+  const getSeries = async (selectedRequirementId: string) => {
+    const list = await getSeriesByRequirementId(selectedRequirementId);
+    setProductionSeries(list);
+  };
+
+  const closeModal = () => {
+    setSelectedPlan(undefined);
+    setSelectedRequirement(undefined);
+    setSelectedSeries(undefined);
+  };
+
+  useEffect(() => {
+    getPlans();
+    if (selectedPlan) {
+      getRequirements(selectedPlan);
+    }
+    if (selectedRequirement) {
+      getSeries(selectedRequirement);
+    }
+  }, [selectedPlan, selectedRequirement]);
 
   async function onSubmit(
     values: z.infer<typeof createInspectionRequestSchema>
   ) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    // console.log(values);
+
+    let a = await createInspectionRequest(session.data?.user?.id, {
+      name: "testtest",
+      productionSeriesId: selectedSeries,
+      requiredQuantity: values.requiredQuantity,
+      description: values.description,
+    });
+    if (a) {
+      closeModal();
+    }
   }
 
   return (
@@ -55,7 +124,10 @@ const CreateModal = () => {
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="tw-flex tw-flex-col tw-gap-2">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="tw-flex tw-flex-col tw-gap-2"
+          >
             <DialogHeader>
               <DialogTitle>Create new inspection request</DialogTitle>
               <DialogDescription>
@@ -69,14 +141,19 @@ const CreateModal = () => {
                 <FormItem>
                   <FormLabel>Production plan:</FormLabel>
                   <FormControl>
-                    <Select {...field}>
-                      <SelectTrigger>
+                    <Select
+                      // {...field}
+                      onValueChange={(value) => setSelectedPlan(value)}
+                    >
+                      <SelectTrigger {...field}>
                         <SelectValue placeholder="Select working production plan" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="light">Light</SelectItem>
-                        <SelectItem value="dark">Dark</SelectItem>
-                        <SelectItem value="system">System</SelectItem>
+                        {productionPlans.map((plan) => (
+                          <SelectItem key={plan.id} value={plan.id}>
+                            {plan.code} - {plan.name}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -86,20 +163,54 @@ const CreateModal = () => {
               )}
             />
             <FormField
+              disabled={selectedPlan ? false : true}
+              control={form.control}
+              name="productionRequirementId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Production requirement:</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={(value) => setSelectedRequirement(value)}
+                    >
+                      <SelectTrigger {...field}>
+                        <SelectValue placeholder="Select a production requirement" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {productionRequirements.map((requirement) => (
+                          <SelectItem
+                            key={requirement.id}
+                            value={requirement.id}
+                          >
+                            {requirement.quantity}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              disabled={selectedRequirement ? false : true}
               control={form.control}
               name="productionSeriesId"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Production series:</FormLabel>
                   <FormControl>
-                    <Select {...field}>
-                      <SelectTrigger>
+                    <Select onValueChange={value => setSelectedSeries(value)}>
+                      <SelectTrigger {...field}>
                         <SelectValue placeholder="Select working production series" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="light">Light</SelectItem>
-                        <SelectItem value="dark">Dark</SelectItem>
-                        <SelectItem value="system">System</SelectItem>
+                        {productionSeries.map((seri) => (
+                          <SelectItem key={seri.id} value={seri.id}>
+                            {seri.code} - {seri.quantity}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </FormControl>
@@ -115,7 +226,14 @@ const CreateModal = () => {
                 <FormItem>
                   <FormLabel>Required quantity:</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="0" {...field} />
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      {...field}
+                      // defaultValue={
+                      //   selectedSeries ? selectedSeries.quantity : 1
+                      // }
+                    />
                   </FormControl>
                   <FormDescription></FormDescription>
                   <FormMessage />
@@ -138,13 +256,14 @@ const CreateModal = () => {
             />
             <DialogFooter>
               <div className="tw-w-full tw-flex tw-justify-between tw-items-center">
-                <DialogClose>cancel</DialogClose>
-                <DialogClose
-                  onClick={() => console.log("first")}
+                <DialogClose onClick={() => closeModal()}>cancel</DialogClose>
+                {/* <DialogClose
+                  onClick={() => closeModal()}
                   className="tw-bg-black tw-text-white tw-px-4 tw-py-2 tw-rounded-md"
                 >
                   Done
-                </DialogClose>
+                </DialogClose> */}
+                <Button type="submit">Done</Button>
               </div>
             </DialogFooter>
           </form>
