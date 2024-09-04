@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { Cell } from "@tanstack/react-table";
+import { Cell, Column, Row, Table } from "@tanstack/react-table";
+import Link from "next/link";
 
 export const StatusCell = ({ getValue }: { getValue: <TValue>() => any }) => {
   const value: string = getValue();
@@ -20,4 +21,21 @@ export const StatusCell = ({ getValue }: { getValue: <TValue>() => any }) => {
   return <Badge className={className}>{value}</Badge>;
 };
 
-export const ActionCell = () => {}
+export const ActionCell = ({
+  row,
+  column,
+  table,
+}: {
+  row: Row<any>;
+  column: Column<any>;
+  table: Table<any>;
+}) => {
+  const tableMeta = table.options.meta;
+  const columnMeta = column.columnDef.meta;
+
+  return (
+    <Link href={`${columnMeta?.detailsHref}/${tableMeta?.data[row.index].id}`}>
+      details
+    </Link>
+  );
+};

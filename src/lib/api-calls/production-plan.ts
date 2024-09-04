@@ -13,7 +13,7 @@ export const getWorkingProductionPlan = async () => {
     expectedStartingDate: null,
     isAscending: true,
     name: "",
-    orderBy: "id",
+    orderBy: "code",
     pagination: { pageIndex: 0, pageSize: 50 },
     status: "InProgress",
     type: "Batch",

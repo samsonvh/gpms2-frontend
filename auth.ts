@@ -11,7 +11,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
         let user: User = {};
 
-        let data = await fetch("http://localhost:5182/api/v1/auth/sign-in", {
+        let data = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/v1/auth/sign-in`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

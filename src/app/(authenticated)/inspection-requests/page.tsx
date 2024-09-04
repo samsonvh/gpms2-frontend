@@ -27,7 +27,7 @@ import inspectionRequestData from "@/lib/mock-data/inspection-requests.json";
 import { getInspectionRequestList } from "@/lib/api-calls/inspection-request";
 
 const InspectionRequestsPage = () => {
-  const [list, setList] = useState();
+  const [list, setList] = useState([]);
 
   const a = async () => {
     const b = await getInspectionRequestList();
@@ -73,31 +73,31 @@ const InspectionRequestsPage = () => {
           <TabsContent value="pending">
             <DataTable
               columns={inspectionRequestColumns}
-              data={inspectionRequestData}
+              data={list}
             />
           </TabsContent>
           <TabsContent value="approved">
             <DataTable
               columns={inspectionRequestColumns}
-              data={inspectionRequestData}
+              data={list}
             />
           </TabsContent>
           <TabsContent value="inProgress">
             <DataTable
               columns={inspectionRequestColumns}
-              data={inspectionRequestData}
+              data={list}
             />
           </TabsContent>
           <TabsContent value="failed">
             <DataTable
               columns={inspectionRequestColumns}
-              data={inspectionRequestData}
+              data={list}
             />
           </TabsContent>
           <TabsContent value="passed">
             <DataTable
               columns={inspectionRequestColumns}
-              data={inspectionRequestData}
+              data={list}
             />
           </TabsContent>
         </Tabs>

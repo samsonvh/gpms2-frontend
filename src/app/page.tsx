@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default async function Home() {
-  // const session = await auth();
-  // if (!session?.user) {
-  //   redirect("/login");
-  // } else {
-  //   console.log("session", session.user);
-  //   redirect("/inspection-requests");
-  // }
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login");
+  } else {
+    console.log("session", session.user);
+    redirect("/inspection-requests");
+  }
 }

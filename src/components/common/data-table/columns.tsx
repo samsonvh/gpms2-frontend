@@ -3,14 +3,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ActionCell, StatusCell } from "./cells";
 
 export const inspectionRequestColumns: ColumnDef<InspectionRequest>[] = [
+  // {
+  //   accessorKey: "productionPlan.code",
+  //   id: "productionPlan",
+  //   header: "Plan",
+  // },
   {
-    accessorKey: "productionPlan.code",
-    id: "productionPlan",
-    header: "Plan",
-  },
-  {
-    accessorKey: "productionSeries.code",
-    id: "productionSeries",
+    accessorKey: "productionSeriesCode",
+    id: "productionSeriesCode",
     header: "Series",
   },
   {
@@ -24,10 +24,15 @@ export const inspectionRequestColumns: ColumnDef<InspectionRequest>[] = [
     header: "Required",
   },
   {
-    accessorKey: "inspectedQuantity",
-    id: "inspectedQuantity",
-    header: "Inspected",
+    accessorKey: "failedQuantity",
+    id: "failedQuantity",
+    header: "Failed",
   },
+  // {
+  //   accessorKey: "inspectedQuantity",
+  //   id: "inspectedQuantity",
+  //   header: "Inspected",
+  // },
   {
     accessorKey: "passedQuantity",
     id: "passedQuantity",
@@ -47,11 +52,14 @@ export const inspectionRequestColumns: ColumnDef<InspectionRequest>[] = [
     accessorKey: "status",
     id: "status",
     header: "Status",
-    cell: StatusCell
+    cell: StatusCell,
   },
   {
     id: "action",
     header: "Actions",
-    cell: ActionCell
+    cell: ActionCell,
+    meta: {
+      detailsHref: "/inspection-requests",
+    },
   },
 ];

@@ -21,9 +21,7 @@ export default function AuthenticatedLayout({
   return (
     <html lang="en">
       <body
-        className={inter.className.concat(
-          " tw-min-h-screen tw-pt-4 tw-flex tw-flex-col"
-        )}
+        className={inter.className}
       >
         <SessionProvider>
           <DefaultHeader />

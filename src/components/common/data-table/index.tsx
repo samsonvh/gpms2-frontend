@@ -23,6 +23,16 @@ import {
 } from "@tanstack/react-table";
 import React from "react";
 
+declare module '@tanstack/react-table' {
+  interface TableMeta<TData> {
+    data: any[]
+  }
+
+  interface ColumnMeta<TData, TValue> {
+    detailsHref?: string
+  }
+}
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -40,8 +50,11 @@ const DataTable = <TData, TValue>({
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: 3,
+        pageSize: 5,
       },
+    },
+    meta: {
+      data,
     },
   });
 
@@ -90,10 +103,24 @@ const DataTable = <TData, TValue>({
               <Pagination>
                 <PaginationContent>
                   <PaginationItem>
-                    <PaginationPrevious className={table.getCanPreviousPage() ? "hover:tw-cursor-pointer" : "tw-hidden"} onClick={() => table.previousPage()} />
+                    <PaginationPrevious
+                      className={
+                        table.getCanPreviousPage()
+                          ? "hover:tw-cursor-pointer"
+                          : "tw-hidden"
+                      }
+                      onClick={() => table.previousPage()}
+                    />
                   </PaginationItem>
                   <PaginationItem>
-                    <PaginationNext className={table.getCanNextPage() ? "hover:tw-cursor-pointer" : "tw-hidden"} onClick={() => table.nextPage()} />
+                    <PaginationNext
+                      className={
+                        table.getCanNextPage()
+                          ? "hover:tw-cursor-pointer"
+                          : "tw-hidden"
+                      }
+                      onClick={() => table.nextPage()}
+                    />
                   </PaginationItem>
                 </PaginationContent>
               </Pagination>
