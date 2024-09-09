@@ -5,6 +5,7 @@ import React from "react";
 const LogoutButton = () => {
   return (
     <span
+      className="tw-p-2 hover:tw-cursor-pointer hover:tw-underline"
       onClick={() => {
         signOut({ callbackUrl: "/", redirect: true });
       }}

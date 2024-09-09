@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export default async function Home() {
   const session = await auth();
+  
   if (!session?.user) {
     redirect("/login");
   } else {

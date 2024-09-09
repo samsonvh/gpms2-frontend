@@ -47,7 +47,7 @@ const LoginForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Card>
           <CardHeader>
-            <CardTitle>Welcome, Manager</CardTitle>
+            <CardTitle>Welcome</CardTitle>
             <CardDescription>
               Please sign in before accessing Inspection Management System!
             </CardDescription>

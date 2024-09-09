@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import React from "react";
@@ -11,16 +11,14 @@ const DefaultHeader = () => {
   const session = useSession();
 
   return (
-    <header className="tw-shadow-lg tw-px-6 tw-pt-6 tw-pb-4 tw-mx-6 tw-rounded-xl tw-flex tw-items-center tw-justify-between">
+    <header className="tw-flex tw-justify-between tw-items-center tw-shadow-md tw-px-4 tw-rounded-md">
       <DigitalClock />
-      <div className="tw-flex tw-items-center tw-gap-2">
-        <p className="tw-text-right">
-          {session?.data?.user?.name} <br /> <LogoutButton />
-        </p>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+      <div className="tw-flex tw-items-center">
+        <div className="tw-flex tw-items-center">
+          <p>{session.data?.user?.name}, </p>
+          <LogoutButton />
+        </div>
+        <Avatar></Avatar>
       </div>
     </header>
   );

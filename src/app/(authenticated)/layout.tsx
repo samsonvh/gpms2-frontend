@@ -5,6 +5,7 @@ import DefaultHeader from "@/components/common/header";
 import { cn } from "@/lib/utils";
 import DefaultFooter from "@/components/common/footer";
 import { SessionProvider } from "next-auth/react";
+import { auth } from "../../../auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,12 +21,12 @@ export default function AuthenticatedLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={inter.className}
-      >
+      <body className={inter.className.concat(" tw-flex tw-flex-col")}>
         <SessionProvider>
-          <DefaultHeader />
-          <main className="tw-mt-8 tw-flex-grow">{children}</main>
+          <div className="tw-px-4 tw-pt-4">
+            <DefaultHeader />
+          </div>
+          <main className="tw-mt-4 tw-flex-grow">{children}</main>
           <DefaultFooter />
         </SessionProvider>
       </body>
