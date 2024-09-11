@@ -19,44 +19,49 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  Table as TanstackTable,
   useReactTable,
 } from "@tanstack/react-table";
 import React from "react";
 
-declare module '@tanstack/react-table' {
+declare module "@tanstack/react-table" {
   interface TableMeta<TData> {
-    data: any[]
+    data: any[];
   }
 
   interface ColumnMeta<TData, TValue> {
-    detailsHref?: string
+    detailsHref?: string;
   }
 }
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  table?: TanstackTable<TData>;
 }
 
 const DataTable = <TData, TValue>({
   columns,
   data,
+  table,
 }: DataTableProps<TData, TValue>) => {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    initialState: {
-      pagination: {
-        pageIndex: 0,
-        pageSize: 5,
-      },
-    },
-    meta: {
+  if (!table) {
+    table = useReactTable({
       data,
-    },
-  });
+      columns,
+      getCoreRowModel: getCoreRowModel(),
+      getPaginationRowModel: getPaginationRowModel(),
+      initialState: {
+        pagination: {
+          pageIndex: 0,
+          pageSize: 5,
+        },
+      },
+      meta: {
+        data,
+      },
+    });
+  }
 
   return (
     <div>

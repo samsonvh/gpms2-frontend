@@ -1,17 +1,19 @@
 "use client";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import React from "react";
+import signOutIcon from "@Public/icons/signout.svg";
+import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
 
 const LogoutButton = () => {
   return (
-    <span
-      className="tw-p-2 hover:tw-cursor-pointer hover:tw-underline"
-      onClick={() => {
-        signOut({ callbackUrl: "/", redirect: true });
-      }}
-    >
-      logout
-    </span>
+    // <button className="tw-p-1 border hover:tw-opacity-80">
+    //   <Image className="tw-scale-x-[-1]" src={signOutIcon} alt="SignOutIcon" />
+    // </button>
+    <Button variant={"link"} size={"icon"} >
+      <LogOut/>
+    </Button>
   );
 };
 

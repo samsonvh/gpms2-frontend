@@ -21,13 +21,15 @@ export default function AuthenticatedLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className.concat(" tw-flex tw-flex-col")}>
+      <body className={inter.className}>
         <SessionProvider>
-          <div className="tw-px-4 tw-pt-4">
-            <DefaultHeader />
+          <div className="tw-min-h-screen tw-flex tw-flex-col">
+            <div className="tw-px-4 tw-pt-4">
+              <DefaultHeader />
+            </div>
+            <main className="tw-my-4 tw-flex-grow tw-flex tw-flex-col">{children}</main>
+            <DefaultFooter />
           </div>
-          <main className="tw-mt-4 tw-flex-grow">{children}</main>
-          <DefaultFooter />
         </SessionProvider>
       </body>
     </html>

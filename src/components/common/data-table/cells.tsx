@@ -1,12 +1,14 @@
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Cell, Column, Row, Table } from "@tanstack/react-table";
 import Link from "next/link";
 
 export const StatusCell = ({ getValue }: { getValue: <TValue>() => any }) => {
   const value: string = getValue();
+
   let className = "";
 
-  switch (value) {
+  switch (value.toLowerCase()) {
     case "pending":
       return <Badge variant={"outline"}>{value}</Badge>;
     case "passed":
@@ -34,8 +36,12 @@ export const ActionCell = ({
   const columnMeta = column.columnDef.meta;
 
   return (
-    <Link href={`${columnMeta?.detailsHref}/${tableMeta?.data[row.index].id}`}>
-      details
-    </Link>
+    <Button variant={"link"}>
+      <Link
+        href={`${columnMeta?.detailsHref}/${tableMeta?.data[row.index].id}`}
+      >
+        details
+      </Link>
+    </Button>
   );
 };

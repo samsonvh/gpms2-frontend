@@ -11,14 +11,19 @@ const DefaultHeader = () => {
   const session = useSession();
 
   return (
-    <header className="tw-flex tw-justify-between tw-items-center tw-shadow-md tw-px-4 tw-rounded-md">
+    <header className="tw-flex tw-justify-between tw-items-center tw-shadow-sm tw-border tw-rounded-md tw-p-4 tw-pt-4 tw-pb-2">
       <DigitalClock />
       <div className="tw-flex tw-items-center">
-        <div className="tw-flex tw-items-center">
+        {/* <div className="tw-flex tw-items-center">
           <p>{session.data?.user?.name}, </p>
           <LogoutButton />
-        </div>
-        <Avatar></Avatar>
+        </div> */}
+        <p className="tw-px-2">{session.data?.user?.name}</p>
+        {/* <Avatar className="tw-h-8 tw-w-auto">
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar> */}
+        <LogoutButton />
       </div>
     </header>
   );

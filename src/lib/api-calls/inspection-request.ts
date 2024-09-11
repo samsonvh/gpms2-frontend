@@ -1,6 +1,15 @@
 import { useSession } from "next-auth/react";
 import { auth } from "../../../auth";
-import { InspectionRequestDetails } from "../types/inspection-request";
+import {
+  InspectionRequestDetails,
+  InspectionRequestListingItem,
+} from "../types/inspection-request";
+import { BaseFilterModel } from "../types/others";
+
+type InspectionRequestFilterModel = BaseFilterModel & {
+  status: "" | "Pending" | "Approved" | "Declined" | "Failed" | "Passed";
+  searchString: string;
+};
 
 export const createInspectionRequest = async (token: any, value: any) => {
   let isSucceed = false;
@@ -23,8 +32,10 @@ export const createInspectionRequest = async (token: any, value: any) => {
   return isSucceed;
 };
 
-export const getInspectionRequestList = async () => {
-  let list: any = [];
+export const getInspectionRequestList = async (
+  filter: InspectionRequestFilterModel
+) => {
+  let list: InspectionRequestListingItem[] = [];
 
   await fetch(
     `${process.env.NEXT_PUBLIC_API_DOMAIN}/api/v1/inspection-requests/filter`,
@@ -33,6 +44,7 @@ export const getInspectionRequestList = async () => {
       headers: {
         "content-type": "application/json",
       },
+      body: JSON.stringify(filter),
     }
   )
     .then((response) => response.json())

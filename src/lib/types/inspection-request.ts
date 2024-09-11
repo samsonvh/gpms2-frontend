@@ -1,4 +1,5 @@
 import { FaultyProduct } from "./inspection-result";
+import { ExtractedInformationModel } from "./others";
 
 export type InspectionRequest = {
   id: string;
@@ -54,6 +55,19 @@ export type InspectionRequestDetails = {
   reviewedDate?: Date;
   reviewerName?: string;
   inspectedDate?: Date;
-  inspectorName?: string,
-  status: string
+  inspectorName?: string;
+  status: string;
+};
+
+export type InspectionRequestListingItem = {
+  id: string;
+  name: string;
+  requiredQuantity: number;
+  inspectedQuantity: number;
+  failedQuantity: number;
+  passedQuantity: number;
+  createdDate: Date;
+  creator: ExtractedInformationModel;
+  productionSeries: ExtractedInformationModel;
+  status: "Pending" | "Approved" | "Declined" | "Failed" | "Passed";
 };

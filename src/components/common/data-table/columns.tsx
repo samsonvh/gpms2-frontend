@@ -1,16 +1,16 @@
-import { InspectionRequest } from "@/lib/types/inspection-request";
+import { InspectionRequest, InspectionRequestListingItem } from "@/lib/types/inspection-request";
 import { ColumnDef } from "@tanstack/react-table";
 import { ActionCell, StatusCell } from "./cells";
 
-export const inspectionRequestColumns: ColumnDef<InspectionRequest>[] = [
+export const inspectionRequestColumns: ColumnDef<InspectionRequestListingItem>[] = [
   // {
   //   accessorKey: "productionPlan.code",
   //   id: "productionPlan",
   //   header: "Plan",
   // },
   {
-    accessorKey: "productionSeriesCode",
-    id: "productionSeriesCode",
+    accessorKey: "productionSeries.code",
+    id: "productionSeries.code",
     header: "Series",
   },
   {
