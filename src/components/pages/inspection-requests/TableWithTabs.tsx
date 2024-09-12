@@ -85,24 +85,7 @@ const TableWithTabs = ({ data }: TableProps) => {
           </div>
         </CardHeader>
         <CardContent>
-          <TabsContent value="all">
-            <DataTable data={list} columns={inspectionRequestColumns} />
-          </TabsContent>
-          <TabsContent value="Pending">
-            <DataTable data={list} columns={inspectionRequestColumns} />
-          </TabsContent>
-          <TabsContent value="Approved">
-            <DataTable data={list} columns={inspectionRequestColumns} />
-          </TabsContent>
-          <TabsContent value="Declined">
-            <DataTable data={list} columns={inspectionRequestColumns} />
-          </TabsContent>
-          <TabsContent value="Failed">
-            <DataTable data={list} columns={inspectionRequestColumns} />
-          </TabsContent>
-          <TabsContent value="Passed">
-            <DataTable data={list} columns={inspectionRequestColumns} />
-          </TabsContent>
+          <DataTable data={list} columns={inspectionRequestColumns} />
         </CardContent>
       </Card>
     </Tabs>
