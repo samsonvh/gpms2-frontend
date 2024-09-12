@@ -40,22 +40,26 @@ export type InspectionRequest = {
 export type InspectionRequestDetails = {
   id: string;
   name: string;
-  description?: string;
   requiredQuantity: number;
+  description?: string;
+  reviewedDate?: Date;
+  createdDate: Date;
   inspectionResult: {
+    id?: string;
     description?: string;
     inspectedQuantity: number;
     passedQuantity: number;
     failedQuantity: number;
     faultyProducts: FaultyProduct[];
+    inspector: ExtractedInformationModel;
+    createdDate: Date;
   };
   productionSeriesCode: string;
-  createdDate: Date;
-  creatorName: string;
-  reviewedDate?: Date;
-  reviewerName?: string;
-  inspectedDate?: Date;
-  inspectorName?: string;
+  creator: ExtractedInformationModel;
+  reviewer?: ExtractedInformationModel;
+  productionPlan?: ExtractedInformationModel;
+  productionSeries?: ExtractedInformationModel;
+  productionSpecification?: ExtractedInformationModel;
   status: string;
 };
 

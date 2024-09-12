@@ -1,14 +1,16 @@
+import { ExtractedInformationModel } from "./others";
+
 export type FaultyProduct = {
   id: string;
   ordinalNumberInSeries: number;
-  description: string;
-  createdDate: Date | string;
+  description?: string;
+  createdDate: Date;
   productFaults: ProductFault[];
 };
 
 export type ProductFault = {
-  qualityStandardName: string;
-  productionStepName: string;
-  measurementName?: string;
   description?: string;
+  qualityStandard: ExtractedInformationModel;
+  productionStep: ExtractedInformationModel;
+  productMeasurement?: ExtractedInformationModel;
 };

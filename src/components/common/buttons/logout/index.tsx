@@ -11,8 +11,8 @@ const LogoutButton = () => {
     // <button className="tw-p-1 border hover:tw-opacity-80">
     //   <Image className="tw-scale-x-[-1]" src={signOutIcon} alt="SignOutIcon" />
     // </button>
-    <Button variant={"link"} size={"icon"} >
-      <LogOut/>
+    <Button onClick={() => signOut({callbackUrl: "/", redirect: true})} variant={"link"} size={"icon"}>
+      <LogOut />
     </Button>
   );
 };

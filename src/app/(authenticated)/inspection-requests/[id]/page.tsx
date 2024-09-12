@@ -1,14 +1,12 @@
+import ReviewRequestButton from "@/components/common/buttons/review-request";
 import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb,
-  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -17,19 +15,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Label } from "@/components/ui/label";
-import React, { useState } from "react";
-import expandIcon from "@Public/icons/expand.svg";
-import checkedDoneIcon from "@Public/icons/checked-done.svg";
-import cancelIcon from "@Public/icons/cancel.svg";
-import Image from "next/image";
-import { getInspectionRequestDetails } from "@/lib/api-calls/inspection-request";
-import { InspectionRequestDetails } from "@/lib/types/inspection-request";
-import {
   Table,
   TableBody,
   TableCell,
@@ -37,7 +22,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import ReviewRequestButton from "@/components/common/buttons/review-request";
+import { getInspectionRequestDetails } from "@/lib/api-calls/inspection-request";
+import { InspectionRequestDetails } from "@/lib/types/inspection-request";
 
 const InspectionRequestDetailPage = async ({
   params: { id },
@@ -46,212 +32,126 @@ const InspectionRequestDetailPage = async ({
 }) => {
   let inspectionRequest: InspectionRequestDetails | null =
     await getInspectionRequestDetails(id);
-  if (inspectionRequest != null) {
+
+  if (inspectionRequest == null) {
+    return <div>Not found</div>;
+  } else {
     inspectionRequest = inspectionRequest as InspectionRequestDetails;
-  }
-
-  let status =
-    inspectionRequest != null
-      ? (inspectionRequest as InspectionRequestDetails).status
-      : "Pending";
-
-  return (
-    <div className="tw-mx-6 tw-flex tw-flex-col tw-gap-4">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/inspection-requests">
-              Inspection Requests
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>
-              {inspectionRequest == null
-                ? "Inspection Request"
-                : (inspectionRequest as InspectionRequestDetails).name}
-            </BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Card>
-        <CardHeader>
-          <div className="tw-flex tw-justify-between tw-items-center tw-gap-2">
-            <CardTitle>
-              {inspectionRequest != null &&
-                (inspectionRequest as InspectionRequestDetails).name}
-            </CardTitle>
-            {status === "Pending" && (
-              <div className="tw-flex tw-justify-between tw-gap-2">
-                <ReviewRequestButton requestId={id} status="Declined">
-                  Decline
-                </ReviewRequestButton>
-                <ReviewRequestButton requestId={id} status="Approved">
-                  Approve
-                </ReviewRequestButton>
+    return (
+      <div className="tw-flex-grow tw-flex tw-flex-col tw-gap-2 tw-px-4">
+        <Breadcrumb className="tw-px-4">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Inspection requests</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem className="tw-font-bold">
+              {inspectionRequest.name}
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <Card>
+          <CardHeader>
+            <div className="tw-flex tw-justify-between tw-items-center">
+              <div className="tw-flex tw-flex-col tw-gap-2">
+                <CardTitle>{inspectionRequest.name}</CardTitle>
+                <CardDescription>
+                  <span className="tw-font-semibold">Description: </span>{inspectionRequest.description}
+                </CardDescription>
               </div>
-            )}
-            {(status === "Declined" || status === "Failed") && (
-              <Badge variant={"destructive"}>{status}</Badge>
-            )}
-            {(status === "Passed" || status === "Approved") && (
-              <Badge variant={"default"}>{status}</Badge>
-            )}
-          </div>
-        </CardHeader>
-        <CardContent>
-          <CardDescription>
-            {inspectionRequest != null &&
-              (inspectionRequest as InspectionRequestDetails).description}
-          </CardDescription>
-          <div className="tw-flex tw-justify-between tw-items-stretch tw-gap-8">
-            <div className="tw-text-nowrap tw-pt-4">
-              <Label>
-                Created:
-                <p>
-                  {inspectionRequest?.createdDate.toString()} by{" "}
-                  {inspectionRequest?.creatorName}
-                </p>
-              </Label>
-              {inspectionRequest?.reviewedDate && (
-                <Label>
-                  Reviewed:
-                  <p>
-                    {inspectionRequest.reviewedDate.toString()} by{" "}
-                    {inspectionRequest.reviewerName}
-                  </p>
-                </Label>
+              {inspectionRequest.status == "Pending" && (
+                <div className="tw-flex tw-gap-2">
+                  <ReviewRequestButton requestId={id} status="Declined">
+                    Decline
+                  </ReviewRequestButton>
+                  <ReviewRequestButton requestId={id} status="Approved">
+                    Approve
+                  </ReviewRequestButton>
+                </div>
               )}
-              {inspectionRequest?.inspectedDate && (
-                <Label>
-                  Inspected:
-                  <p>
-                    {inspectionRequest.inspectedDate.toString()} by{" "}
-                    {inspectionRequest.inspectorName}
-                  </p>
-                </Label>
+              {inspectionRequest.status == "Approved" && (
+                <Badge>Approved</Badge>
+              )}
+              {inspectionRequest.status == "Declined" && (
+                <Badge variant={"destructive"}>Declined</Badge>
+              )}
+              {inspectionRequest.status == "Failed" && (
+                <Badge variant={"destructive"}>Failed</Badge>
+              )}
+              {inspectionRequest.status == "Passed" && <Badge>Passed</Badge>}
+            </div>
+          </CardHeader>
+          <CardContent className="tw-flex tw-justify-between tw-items-end">
+            <div className="tw-text-nowrap tw-flex-grow tw-py-4">
+              <p>
+                Created at{" "}
+                <span className="tw-font-semibold">
+                  {inspectionRequest.createdDate.toString()}
+                </span>{" "}
+                by{" "}
+                <span className="tw-font-semibold">
+                  {inspectionRequest.creator.name}
+                </span>
+              </p>
+              {inspectionRequest.reviewer == null ? null : (
+                <p>
+                  {inspectionRequest.status == "Declined"
+                    ? "Declined"
+                    : "Approved"}{" "}
+                  at{" "}
+                  <span className="tw-font-semibold">
+                    {inspectionRequest.reviewedDate!.toString()}
+                  </span>{" "}
+                  by{" "}
+                  <span className="tw-font-semibold">
+                    {inspectionRequest.reviewer.name}
+                  </span>
+                </p>
+              )}
+              {inspectionRequest.inspectionResult.inspector == null ? null : (
+                <p>
+                  Created at{" "}
+                  <span className="tw-font-semibold">
+                    {inspectionRequest.inspectionResult.createdDate!.toString()}
+                  </span>{" "}
+                  by{" "}
+                  <span className="tw-font-semibold">
+                    {inspectionRequest.inspectionResult.inspector.name}
+                  </span>
+                </p>
               )}
             </div>
             <div>
-              <div className="tw-flex tw-justify-end">
-                <Label>
-                  Production series: {inspectionRequest?.productionSeriesCode}
-                </Label>
-              </div>
-              <Table className="tw-text-center">
+              <Table className="tw-text-center tw-w-min">
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Required</TableHead>
-                    <TableHead>Inspected</TableHead>
-                    <TableHead>Failed</TableHead>
-                    <TableHead>Passed</TableHead>
+                    <TableHead className="tw-text-center">Required</TableHead>
+                    <TableHead className="tw-text-center">Inspected</TableHead>
+                    <TableHead className="tw-text-center">Failed</TableHead>
+                    <TableHead className="tw-text-center">Passed</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow>
+                    <TableCell>{inspectionRequest.requiredQuantity}</TableCell>
                     <TableCell>
-                      <span>{inspectionRequest?.requiredQuantity}</span>
+                      {inspectionRequest.inspectionResult.inspectedQuantity}
                     </TableCell>
                     <TableCell>
-                      <span>
-                        {inspectionRequest?.inspectionResult
-                          ? inspectionRequest?.inspectionResult
-                              .inspectedQuantity
-                          : 0}
-                      </span>
+                      {inspectionRequest.inspectionResult.failedQuantity}
                     </TableCell>
                     <TableCell>
-                      <span>
-                        {inspectionRequest?.inspectionResult
-                          ? inspectionRequest?.inspectionResult.failedQuantity
-                          : 0}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <span>
-                        {inspectionRequest?.inspectionResult
-                          ? inspectionRequest?.inspectionResult.passedQuantity
-                          : 0}
-                      </span>
+                      {inspectionRequest.inspectionResult.passedQuantity}
                     </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
             </div>
-          </div>
-          <Collapsible>
-            <div className="tw-flex tw-justify-between tw-items-center tw-pl-2 tw-pr-4 tw-pb-2">
-              <Label>
-                {inspectionRequest?.inspectionResult
-                  ? inspectionRequest.inspectionResult.faultyProducts.length
-                  : 0}{" "}
-                faulty products:
-              </Label>
-              <CollapsibleTrigger>
-                <Image src={expandIcon} alt="expand" />
-              </CollapsibleTrigger>
-            </div>
-            <CollapsibleContent>
-              {inspectionRequest?.inspectionResult &&
-                inspectionRequest.inspectionResult.faultyProducts.map(
-                  (product, index) => (
-                    <Card key={index}>
-                      <CardHeader>
-                        <CardTitle>Faulty product #{index + 1}</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <Label>
-                          Ordinal number in series:{" "}
-                          {product.ordinalNumberInSeries}
-                        </Label>
-                        <br />
-                        <Label>
-                          Description:
-                          <p>{product.description}</p>
-                        </Label>
-                        <Collapsible>
-                          <div className="tw-flex tw-justify-between tw-items-center tw-pl-2 tw-pr-4">
-                            <Label>
-                              {product.productFaults.length} faulty products:
-                            </Label>
-                            <CollapsibleTrigger>
-                              <Image src={expandIcon} alt="expand" />
-                            </CollapsibleTrigger>
-                          </div>
-                          <CollapsibleContent>
-                            {product.productFaults.map((fault, index) => (
-                              <Card key={index}>
-                                <CardHeader>
-                                  <CardTitle>Product fault #{index}</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                  <Label>
-                                    Violated quality standard:{" "}
-                                    <p>{fault.qualityStandardName}</p>
-                                  </Label>
-                                  <Label>
-                                    Fault at production step:{" "}
-                                    <p>{fault.productionStepName}</p>
-                                  </Label>
-                                  <Label>
-                                    Description:{" "}
-                                    <p>{fault.description}</p>
-                                  </Label>
-                                </CardContent>
-                              </Card>
-                            ))}
-                          </CollapsibleContent>
-                        </Collapsible>
-                      </CardContent>
-                    </Card>
-                  )
-                )}
-            </CollapsibleContent>
-          </Collapsible>
-        </CardContent>
-      </Card>
-    </div>
-  );
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 };
 
 export default InspectionRequestDetailPage;
