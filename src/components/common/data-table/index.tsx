@@ -37,7 +37,7 @@ declare module "@tanstack/react-table" {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  table?: TanstackTable<TData>;
+  table: TanstackTable<TData>;
 }
 
 const DataTable = <TData, TValue>({
@@ -45,23 +45,23 @@ const DataTable = <TData, TValue>({
   data,
   table,
 }: DataTableProps<TData, TValue>) => {
-  if (!table) {
-    table = useReactTable({
-      data,
-      columns,
-      getCoreRowModel: getCoreRowModel(),
-      getPaginationRowModel: getPaginationRowModel(),
-      initialState: {
-        pagination: {
-          pageIndex: 0,
-          pageSize: 5,
-        },
-      },
-      meta: {
-        data,
-      },
-    });
-  }
+  // if (!table) {
+  //   table = useReactTable({
+  //     data,
+  //     columns,
+  //     getCoreRowModel: getCoreRowModel(),
+  //     getPaginationRowModel: getPaginationRowModel(),
+  //     initialState: {
+  //       pagination: {
+  //         pageIndex: 0,
+  //         pageSize: 5,
+  //       },
+  //     },
+  //     meta: {
+  //       data,
+  //     },
+  //   });
+  // }
 
   return (
     <div>

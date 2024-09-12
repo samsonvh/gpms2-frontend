@@ -11,6 +11,7 @@ import DataTable from "@/components/common/data-table";
 import { inspectionRequestColumns } from "@/components/common/data-table/columns";
 import CreateModal from "./CreateModal";
 import { Search } from "lucide-react";
+import { getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 
 type TableProps = {
   data: InspectionRequestListingItem[];
@@ -49,6 +50,22 @@ const TableWithTabs = ({ data }: TableProps) => {
     search();
   }, []);
 
+  const table = useReactTable({
+    data: list,
+    columns: inspectionRequestColumns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageIndex: 0,
+        pageSize: 5,
+      },
+    },
+    meta: {
+      data: list,
+    },
+  });
+
   return (
     <Tabs
       defaultValue="all"
@@ -85,7 +102,7 @@ const TableWithTabs = ({ data }: TableProps) => {
           </div>
         </CardHeader>
         <CardContent>
-          <DataTable data={list} columns={inspectionRequestColumns} />
+          <DataTable table={table} data={list} columns={inspectionRequestColumns} />
         </CardContent>
       </Card>
     </Tabs>
