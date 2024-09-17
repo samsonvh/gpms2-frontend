@@ -1,4 +1,4 @@
-import { FaultyProduct } from "./inspection-result";
+import { FaultyProduct, InspectionResult } from "./inspection-result";
 import { ExtractedInformationModel } from "./others";
 
 export type InspectionRequest = {
@@ -44,16 +44,7 @@ export type InspectionRequestDetails = {
   description?: string;
   reviewedDate?: Date;
   createdDate: Date;
-  inspectionResult: {
-    id?: string;
-    description?: string;
-    inspectedQuantity: number;
-    passedQuantity: number;
-    failedQuantity: number;
-    faultyProducts: FaultyProduct[];
-    inspector: ExtractedInformationModel;
-    createdDate: Date;
-  };
+  inspectionResult: InspectionResult;
   productionSeriesCode: string;
   creator: ExtractedInformationModel;
   reviewer?: ExtractedInformationModel;

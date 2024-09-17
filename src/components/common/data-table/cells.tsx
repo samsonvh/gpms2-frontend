@@ -14,6 +14,9 @@ export const StatusCell = ({ getValue }: { getValue: <TValue>() => any }) => {
     case "passed":
       className = "tw-bg-lime-600";
       break;
+    case "inprogress":
+      className = "tw-bg-blue-400";
+      break;
     case "declined":
     case "failed":
       className = "tw-bg-rose-600";

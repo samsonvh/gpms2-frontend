@@ -11,7 +11,11 @@ import DataTable from "@/components/common/data-table";
 import { inspectionRequestColumns } from "@/components/common/data-table/columns";
 import CreateModal from "./CreateModal";
 import { Search } from "lucide-react";
-import { getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
+import {
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
 type TableProps = {
   data: InspectionRequestListingItem[];
@@ -21,7 +25,13 @@ const TableWithTabs = ({ data }: TableProps) => {
   const [list, setList] = useState<InspectionRequestListingItem[]>([]);
   const [searchString, setSearchString] = useState<string>("");
   const [status, setStatus] = useState<
-    "" | "Pending" | "Approved" | "Declined" | "Failed" | "Passed"
+    | ""
+    | "Pending"
+    | "Approved"
+    | "Declined"
+    | "Failed"
+    | "Passed"
+    | "InProgress"
   >("");
 
   const filter = async (value: string) => {
@@ -34,7 +44,8 @@ const TableWithTabs = ({ data }: TableProps) => {
             | "Approved"
             | "Declined"
             | "Failed"
-            | "Passed");
+            | "Passed"
+            | "InProgress");
     setStatus(currentStatus);
     const filteredList = await filterStatus(searchString, currentStatus);
     setList(filteredList);
@@ -75,11 +86,12 @@ const TableWithTabs = ({ data }: TableProps) => {
       <Card className="tw-flex-grow">
         <CardHeader>
           <div className="tw-flex tw-justify-between">
-            <TabsList className="tw-grid tw-grid-cols-6">
+            <TabsList className="tw-grid tw-grid-cols-7">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="Pending">Pending</TabsTrigger>
               <TabsTrigger value="Approved">Approved</TabsTrigger>
               <TabsTrigger value="Declined">Declined</TabsTrigger>
+              <TabsTrigger value="InProgress">In Progress</TabsTrigger>
               <TabsTrigger value="Failed">Failed</TabsTrigger>
               <TabsTrigger value="Passed">Passed</TabsTrigger>
             </TabsList>
@@ -102,7 +114,11 @@ const TableWithTabs = ({ data }: TableProps) => {
           </div>
         </CardHeader>
         <CardContent>
-          <DataTable table={table} data={list} columns={inspectionRequestColumns} />
+          <DataTable
+            table={table}
+            data={list}
+            columns={inspectionRequestColumns}
+          />
         </CardContent>
       </Card>
     </Tabs>

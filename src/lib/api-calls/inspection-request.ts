@@ -7,7 +7,7 @@ import {
 import { BaseFilterModel } from "../types/others";
 
 type InspectionRequestFilterModel = BaseFilterModel & {
-  status: "" | "Pending" | "Approved" | "Declined" | "Failed" | "Passed";
+  status: "" | "Pending" | "Approved" | "Declined" | "Failed" | "Passed"| "InProgress";
   searchString: string;
 };
 
@@ -35,6 +35,8 @@ export const createInspectionRequest = async (token: any, value: any) => {
 export const getInspectionRequestList = async (
   filter: InspectionRequestFilterModel
 ) => {
+  const session = await auth();
+
   let list: InspectionRequestListingItem[] = [];
 
   await fetch(
@@ -42,6 +44,7 @@ export const getInspectionRequestList = async (
     {
       method: "POST",
       headers: {
+        "Authorization": "Bearer " + session?.user?.id,
         "content-type": "application/json",
       },
       body: JSON.stringify(filter),
@@ -57,12 +60,14 @@ export const getInspectionRequestList = async (
 };
 
 export const getInspectionRequestDetails = async (id: string) => {
+  const session = await auth();
   let request: InspectionRequestDetails | null = null;
 
   await fetch(
     `${process.env.NEXT_PUBLIC_API_DOMAIN}/api/v1/inspection-requests/${id}`,
     {
       headers: {
+        "Authorization": "Bearer " + session?.user?.id,
         "content-type": "application/json",
       },
       cache: "no-cache",
