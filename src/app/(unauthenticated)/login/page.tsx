@@ -1,12 +1,4 @@
 import React from "react";
-import styles from "@/styles/pages/login.module.scss";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import LoginForm from "@/components/pages/login/LoginForm";
 
 const LoginPage = () => {

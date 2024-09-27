@@ -12,3 +12,11 @@ export type BaseFilterModel = {
     pageSize: number;
   };
 };
+
+export type Notification = {
+  id: string,
+  title?: string;
+  body?: string;
+  time: Date | string;
+  type: "newRequest" | "started" | "failed" | "passed";
+};

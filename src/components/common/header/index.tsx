@@ -6,6 +6,7 @@ import DigitalClock from "../clock/digital";
 import { useSession } from "next-auth/react";
 // import { auth, signOut } from "../../../../auth";
 import LogoutButton from "../buttons/logout";
+import NotificationSection from "../notification";
 
 const DefaultHeader = () => {
   const session = useSession();
@@ -18,6 +19,7 @@ const DefaultHeader = () => {
           <p>{session.data?.user?.name}, </p>
           <LogoutButton />
         </div> */}
+        <NotificationSection />
         <p className="tw-px-2">{session.data?.user?.name}</p>
         {/* <Avatar className="tw-h-8 tw-w-auto">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
