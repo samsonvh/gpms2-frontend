@@ -22,16 +22,11 @@ type TableProps = {
 };
 
 const TableWithTabs = ({ data }: TableProps) => {
+  const [loaded, setLoaded] = useState(false);
   const [list, setList] = useState<InspectionRequestListingItem[]>([]);
   const [searchString, setSearchString] = useState<string>("");
   const [status, setStatus] = useState<
-    | ""
-    | "Pending"
-    | "Approved"
-    | "Declined"
-    | "Failed"
-    | "Passed"
-    | "InProgress"
+    "" | "Pending" | "Approved" | "Declined" | "Failed" | "Passed"
   >("");
 
   const filter = async (value: string) => {
@@ -44,8 +39,7 @@ const TableWithTabs = ({ data }: TableProps) => {
             | "Approved"
             | "Declined"
             | "Failed"
-            | "Passed"
-            | "InProgress");
+            | "Passed");
     setStatus(currentStatus);
     const filteredList = await filterStatus(searchString, currentStatus);
     setList(filteredList);
@@ -59,7 +53,7 @@ const TableWithTabs = ({ data }: TableProps) => {
 
   useEffect(() => {
     search();
-  }, []);
+  }, [loaded]);
 
   const table = useReactTable({
     data: list,
@@ -86,12 +80,11 @@ const TableWithTabs = ({ data }: TableProps) => {
       <Card className="tw-flex-grow">
         <CardHeader>
           <div className="tw-flex tw-justify-between">
-            <TabsList className="tw-grid tw-grid-cols-7">
+            <TabsList className="tw-grid tw-grid-cols-6">
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="Pending">Pending</TabsTrigger>
               <TabsTrigger value="Approved">Approved</TabsTrigger>
               <TabsTrigger value="Declined">Declined</TabsTrigger>
-              <TabsTrigger value="InProgress">In Progress</TabsTrigger>
               <TabsTrigger value="Failed">Failed</TabsTrigger>
               <TabsTrigger value="Passed">Passed</TabsTrigger>
             </TabsList>

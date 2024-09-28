@@ -40,7 +40,7 @@ const NotificationSection = () => {
         };
       }
     }
-  }, [notificationPermissionStatus]);
+  }, [notificationPermissionStatus, notifications]);
 
   const onClickIcon = () => {
     setFocused(!focused);
@@ -82,7 +82,10 @@ const NotificationSection = () => {
             {notifications.length > 0 ? (
               <div className="tw-shadow-inner tw-p-1 tw-rounded-sm">
                 {notifications.map((notification) => (
-                  <div className="tw-p-1 tw-rounded-sm hover:tw-shadow-md">
+                  <div
+                    key={notification.id}
+                    className="tw-p-1 tw-rounded-sm hover:tw-shadow-md"
+                  >
                     <p className="tw-text-sm tw-font-semibold">
                       {notification.title}
                     </p>
