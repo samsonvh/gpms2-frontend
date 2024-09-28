@@ -9,15 +9,36 @@ import Image from "next/image";
 import { Notification } from "@/lib/types/others";
 import { getMessaging, onMessage } from "firebase/messaging";
 import firebaseApp from "../../../../firebase";
+import { useSession } from "next-auth/react";
 
 const NotificationSection = () => {
   const { fcmToken, notificationPermissionStatus } = useFcmToken();
+  const session = useSession();
 
+  console.log(session.data?.user?.id);
   console.log(fcmToken);
 
   const [focused, setFocused] = useState(false);
   const [hasNewMessage, setHasNewMessage] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
+
+  const loadNotificationsFromBE = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/api/v1/notifications`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + session.data?.user?.id,
+        "content-type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setNotifications(data));
+  };
+
+  useEffect(() => {
+    if (session.data) {
+      loadNotificationsFromBE();
+    }
+  }, [session]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
@@ -30,7 +51,8 @@ const NotificationSection = () => {
             title: payload.notification?.title,
             body: payload.notification?.body,
             type: "newRequest",
-            time: payload.data![`google.c.a.ts`],
+            time:
+              payload.data![`google.c.a.ts`] ?? payload.data!["createdDate"],
           };
           setNotifications([...notifications, newNoti]);
           console.log("Foreground push notification received:", payload);

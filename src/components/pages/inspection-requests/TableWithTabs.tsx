@@ -22,7 +22,6 @@ type TableProps = {
 };
 
 const TableWithTabs = ({ data }: TableProps) => {
-  const [loaded, setLoaded] = useState(false);
   const [list, setList] = useState<InspectionRequestListingItem[]>([]);
   const [searchString, setSearchString] = useState<string>("");
   const [status, setStatus] = useState<
@@ -53,7 +52,7 @@ const TableWithTabs = ({ data }: TableProps) => {
 
   useEffect(() => {
     search();
-  }, [loaded]);
+  }, []);
 
   const table = useReactTable({
     data: list,
@@ -102,7 +101,7 @@ const TableWithTabs = ({ data }: TableProps) => {
                   <Search className="tw-h-5 tw-w-auto" />
                 </Button>
               </div>
-              <CreateModal />
+              {/* <CreateModal /> */}
             </div>
           </div>
         </CardHeader>

@@ -14,9 +14,17 @@ export type BaseFilterModel = {
 };
 
 export type Notification = {
-  id: string,
+  id: string;
   title?: string;
   body?: string;
   time: Date | string;
   type: "newRequest" | "started" | "failed" | "passed";
+};
+
+export type BENotification = {
+  id: string;
+  title: string;
+  body: string;
+  createdDate: Date | string;
+  isRead: boolean;
 };
