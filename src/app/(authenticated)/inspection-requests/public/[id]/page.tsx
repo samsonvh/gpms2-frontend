@@ -37,7 +37,7 @@ const InspectionRequestDetailPage = ({
     await fetch(
       `${
         process.env.NEXT_PUBLIC_API_DOMAIN
-      }/api/v1/inspection-requests/${id}?token=${encodeURIComponent(searchParams.get("token"))}`,
+      }/api/v1/inspection-requests/${id}?token=${encodeURIComponent(searchParams.get("token")!)}`,
       {
         method: "GET",
         headers: {
