@@ -56,7 +56,7 @@ const InspectionRequestDetailPage = ({
   //   await getInspectionRequestDetails(id);
 
   if (inspectionRequest == null) {
-    return <div>Not found</div>;
+    return <div></div>;
   } else {
     // inspectionRequest = inspectionRequest as InspectionRequestDetails;
     return (
